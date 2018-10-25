@@ -60,7 +60,7 @@ export default {
     login,
     logout () {
       logout()
-      window.location.href = 'https://syndication-web.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost:8080'
+      window.location.href = 'https://' + process.env.DOMAIN + '/v2/logout?returnTo=http%3A%2F%2F' + process.env.HOST
     }
   }
 }

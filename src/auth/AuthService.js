@@ -1,7 +1,10 @@
 import auth0 from 'auth0-js'
-import { AUTH_CONFIG } from './auth0-variables'
 import EventEmitter from 'eventemitter3'
 import router from './../router'
+
+const CLIENT_ID = process.env.CLIENT_ID
+const DOMAIN = process.env.DOMAIN
+const CALLBACK_URL = process.env.CALLBACK_URL
 
 export default class AuthService {
   authenticated = this.isAuthenticated()
@@ -15,13 +18,13 @@ export default class AuthService {
   }
 
   auth0 = new auth0.WebAuth({
-    domain: AUTH_CONFIG.domain,
-    clientID: AUTH_CONFIG.clientId
+    domain: DOMAIN,
+    clientID: CLIENT_ID
   })
 
   login () {
     this.auth0.authorize({
-      redirectUri: AUTH_CONFIG.callbackUrl,
+      redirectUri: CALLBACK_URL,
       responseType: 'token id_token',
       scope: 'openid profile email'
     })
