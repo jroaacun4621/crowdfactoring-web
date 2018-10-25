@@ -31,6 +31,9 @@ export default {
     redirect (uri) {
       window.location.href = uri
     }
+  },
+  mounted () {
+    console.log(process.env)
   }
 }
 </script>
