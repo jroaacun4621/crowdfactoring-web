@@ -44,7 +44,6 @@
 </body>
 </html>
 
-
 <script>
 export default {
   name: 'home',
@@ -69,8 +68,6 @@ var app = new Vue({
   }
 })
 
-
-
 <style>
   a {
     cursor: pointer;
@@ -79,5 +76,3 @@ var app = new Vue({
 	text-align: center;	
   }
 </style>
-
-
