@@ -73,6 +73,6 @@ var app = new Vue({
     cursor: pointer;
   }
   body {
-	text-align: center;	
+    text-align: center;
   }
 </style>
