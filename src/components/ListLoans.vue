@@ -47,13 +47,15 @@
 <script>
 export default {
   name: 'home',
-  data: {
-    lista: [
-      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
-      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
-      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
-      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'}
-    ],
+  data: function () {
+    return {
+      lista: [
+        {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
+        {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
+        {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
+        {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'}
+      ]
+    }
   },
   props: ['auth', 'authenticated'],
   methods: {
