@@ -47,6 +47,14 @@
 <script>
 export default {
   name: 'home',
+  data: {
+    lista: [
+      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
+      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
+      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
+      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'}
+    ],
+  },
   props: ['auth', 'authenticated'],
   methods: {
     redirect (uri) {
@@ -55,18 +63,6 @@ export default {
   }
 }
 </script>
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    lista: [
-      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
-      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
-      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
-      {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'}
-    ],
-  }
-})
 
 <style>
   a {
