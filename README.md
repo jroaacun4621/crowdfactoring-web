@@ -1,6 +1,6 @@
-# syndication-web
+# personal-page
 
-> Syndication web page
+> Profesional page
 
 ## Build Setup
 
