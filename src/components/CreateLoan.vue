@@ -3,15 +3,10 @@
   <div>
     <div>
       <h4>
-        CREAR PRESTAMO HECTOR - HOLA
+        CREAR PRESTAMO
       </h4>
     </div>
   </div>
-    <div class="content-title-text">
-		<h4>
-			COMPRAR
-		</h4>
-	</div>
   <TABLE class="content-message-table">
     <TR>
       <TD>Porcentaje a Comprar</TD>
