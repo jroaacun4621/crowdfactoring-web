@@ -88,16 +88,7 @@ export default {
   props: ['auth', 'authenticated'],
   data: function () {
     return {
-      rows: [
-        {
-          'txtPorcentaje': 1,
-          'txtTarjeta': 2,
-          'txtSecCode': 3,
-          'txtTitular': 4,
-          'txtFecExp': 5,
-          'txtMail': 6
-        }
-      ],
+      rows: [],
       txtPorcentaje: '',
       txtTarjeta: '',
       txtSecCode: '',
