@@ -1,6 +1,12 @@
 <template>
   <div id="home">
   <div>
+    <div>
+      <h4>
+        CREAR PRESTAMO HECTOR - HOLA
+      </h4>
+    </div>
+  </div>
     <div class="content-title-text">
 		<h4>
 			COMPRAR
@@ -75,11 +81,8 @@
     </li>
   </ul>
 </div>
-</div>
-
-</template>
-
-<script>
+ </template>
+ <script>
 export default {
   name: 'home',
   props: ['auth', 'authenticated'],
@@ -137,8 +140,7 @@ export default {
   }
 }
 </script>
-
-<style>
+ <style>
 a {
     cursor: pointer;
   }
