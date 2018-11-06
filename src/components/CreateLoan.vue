@@ -57,6 +57,14 @@
       </TD>
     </TR> -->
     <TR>
+      <TD>Tipo de producto</TD>
+    </TR>
+    <TR>
+      <div class="col-md-5">
+        <textarea v-model="txtTipo" class="form-control"></textarea>
+      </div>
+    </TR>
+    <TR>
       <TD>
         <div class="col-md-1">
           <button @click="cleanRegistro">Cancelar</button>
@@ -70,11 +78,6 @@
       </TD>
     </TR>
   </TABLE>
-  <ul>
-    <li v-for="item in rows">
-      {{ item.txtId }} @{{ item.txtPorcentaje }} <strong>@{{ item.txtMonto }}</strong>
-    </li>
-  </ul>
 </div>
  </template>
  <script>
@@ -87,7 +90,8 @@ export default {
       txtPorcentaje: '',
       txtMonto: '',
       txtInteres: '',
-      txtInversor: ''
+      txtInversor: '',
+      txtTipo: ''
     }
   },
   methods: {
@@ -101,13 +105,15 @@ export default {
           'txtPorcentaje': this.txtPorcentaje,
           'txtMonto': this.txtMonto,
           'txtInteres': this.txtInteres,
-          'txtInversor': this.txtInversor
+          'txtInversor': this.txtInversor,
+          'txtTipo': this.txtTipo
         }
       )
       this.txtPorcentaje= ''
       this.txtMonto= ''
       this.txtInteres= ''
       this.txtInversor= ''
+      this.txtTipo= ''
       localStorage.removeItem('rows')
       localStorage.setItem('rows', JSON.stringify(this.rows))
 		},

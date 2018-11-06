@@ -11,12 +11,12 @@
               <th>Tipo de producto</th>
             </tr>
             <tr v-for="item in lista">
-              <td v-text="item.txtId"></td>
+              <td v-text="item.txtId + 1"></td>
               <td v-text="item.txtMonto"></td>
               <td v-text="item.txtInteres"></td>
               <td v-text="item.txtPorcentaje"></td>
               <td v-text="item.txtInversor"></td>
-              <td v-text="item.tipoproducto"></td>
+              <td v-text="item.txtTipo"></td>
             </tr>
           </table>
         </div>
