@@ -9,8 +9,24 @@
   </div>
   <TABLE class="content-message-table">
     <TR>
-      <TD>Porcentaje a Comprar</TD>
-      <TD>Numero Tarjeta de Credito</TD>
+      <TD>Monto</TD>
+      <TD>Interes</TD>
+    </TR>
+    <TR>
+      <TD>
+        <div class="col-md-5">
+          <input type="text" v-model="txtMonto" class="form-control">
+        </div>
+      </TD>
+      <TD>
+        <div class="col-md-5">
+          <input type="text" v-model="txtInteres" class="form-control">
+        </div>
+      </TD>
+    </TR>
+    <TR>
+      <TD>% a Vender</TD>
+      <TD>Inversor</TD>
     </TR>
     <TR>
       <TD>
@@ -20,27 +36,11 @@
       </TD>
       <TD>
         <div class="col-md-5">
-          <input type="text" v-model="txtTarjeta" class="form-control">
+          <input type="text" v-model="txtInversor" class="form-control">
         </div>
       </TD>
     </TR>
-    <TR>
-      <TD>Codigo de Seguridad</TD>
-      <TD>Titular</TD>
-    </TR>
-    <TR>
-      <TD>
-        <div class="col-md-5">
-          <input type="text" v-model="txtSecCode" class="form-control">
-        </div>
-      </TD>
-      <TD>
-        <div class="col-md-5">
-          <input type="text" v-model="txtTitular" class="form-control">
-        </div>
-      </TD>
-    </TR>
-    <TR>
+    <!-- <TR>
       <TD>Fecha de Expiracion (yyyy/mm)</TD>
       <TD>Correo Electronico</TD>
     </TR>
@@ -55,7 +55,7 @@
           <input type="text" v-model="txtMail" class="form-control">
         </div>
       </TD>
-    </TR>
+    </TR> -->
     <TR>
       <TD>
         <div class="col-md-1">
@@ -72,7 +72,7 @@
   </TABLE>
   <ul>
     <li v-for="item in rows">
-      @{{ item.txtPorcentaje }} <strong>@{{ item.txtMail }}</strong>
+      {{ item.txtId }} @{{ item.txtPorcentaje }} <strong>@{{ item.txtMonto }}</strong>
     </li>
   </ul>
 </div>
@@ -85,11 +85,9 @@ export default {
     return {
       rows: [],
       txtPorcentaje: '',
-      txtTarjeta: '',
-      txtSecCode: '',
-      txtTitular: '',
-      txtFecExp: '',
-      txtMail: ''
+      txtMonto: '',
+      txtInteres: '',
+      txtInversor: ''
     }
   },
   methods: {
@@ -99,21 +97,19 @@ export default {
     addRegistro: function(){
       this.rows.push(
         {
+          'txtId': this.rows.length,
           'txtPorcentaje': this.txtPorcentaje,
-          'txtTarjeta': this.txtTarjeta,
-          'txtSecCode': this.txtSecCode,
-          'txtTitular': this.txtTitular,
-          'txtFecExp': this.txtFecExp,
-          'txtMail': this.txtMail
+          'txtMonto': this.txtMonto,
+          'txtInteres': this.txtInteres,
+          'txtInversor': this.txtInversor
         }
       )
-      this.txtPorcentaje = ''
-      this.txtTarjeta = ''
-      this.txtSecCode = ''
-      this.txtTitular = ''
-      this.txtFecExp = ''
-      this.txtMail = ''
-      console.log(this.rows)
+      this.txtPorcentaje= ''
+      this.txtMonto= ''
+      this.txtInteres= ''
+      this.txtInversor= ''
+      localStorage.removeItem('rows')
+      localStorage.setItem('rows', JSON.stringify(this.rows))
 		},
     cleanRegistro: function(){
       this.txtPorcentaje = ''
@@ -123,6 +119,11 @@ export default {
       this.txtFecExp = ''
       this.txtMail = ''
 		}
+  },
+  mounted: function () {
+    if (localStorage.getItem('rows') !== null) {
+        this.rows = JSON.parse(localStorage.getItem('rows'))
+    }
   }
 }
 </script>

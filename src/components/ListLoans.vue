@@ -11,11 +11,11 @@
               <th>Tipo de producto</th>
             </tr>
             <tr v-for="item in lista">
-              <td v-text="item.producto"></td>
-              <td v-text="item.monto"></td>
-              <td v-text="item.interes"></td>
-              <td v-text="item.porcentaje"></td>
-              <td v-text="item.inversores"></td>
+              <td v-text="item.txtId"></td>
+              <td v-text="item.txtMonto"></td>
+              <td v-text="item.txtInteres"></td>
+              <td v-text="item.txtPorcentaje"></td>
+              <td v-text="item.txtInversor"></td>
               <td v-text="item.tipoproducto"></td>
             </tr>
           </table>
@@ -27,18 +27,18 @@ export default {
   name: 'home',
   data: function () {
     return {
-      lista: [
-        {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
-        {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
-        {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'},
-        {producto: 'asd', monto: 'asd', interes: 'asd', porcentaje: 'asd', inversores: 'asd', tipoproducto: 'asd'}
-      ]
+      lista: []
     }
   },
   props: ['auth', 'authenticated'],
   methods: {
     redirect (uri) {
       window.location.href = uri
+    }
+  },
+  mounted: function () {
+    if (localStorage.getItem('rows') !== null) {
+        this.lista = JSON.parse(localStorage.getItem('rows'))
     }
   }
 }
