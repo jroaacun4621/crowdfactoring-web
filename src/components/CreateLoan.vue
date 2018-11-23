@@ -78,6 +78,9 @@
       </TD>
     </TR>
   </TABLE>
+  <div id="message" style="visibility: hidden">
+    Elemento guardado con éxito.
+  </div>
 </div>
  </template>
  <script>
@@ -99,37 +102,29 @@ export default {
       window.location.href = uri
     },
     addRegistro: function(){
-      this.rows.push(
-        {
-          'txtId': this.rows.length,
-          'txtPorcentaje': this.txtPorcentaje,
-          'txtMonto': this.txtMonto,
-          'txtInteres': this.txtInteres,
-          'txtInversor': this.txtInversor,
-          'txtTipo': this.txtTipo
-        }
-      )
+      this.axios.post(process.env.API_HOST + '/loans', {
+        'value': this.txtMonto,
+        'interest':  this.txtInteres,
+        'sold_percent': this.txtPorcentaje,
+        'investor': this.txtInversor,
+        'product_type': this.txtTipo
+      })
+      .then(response => {
+        document.getElementById('message').style.visibility = 'visible'
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
+
+      this.cleanRegistro()
+		},
+    cleanRegistro: function(){
       this.txtPorcentaje= ''
       this.txtMonto= ''
       this.txtInteres= ''
       this.txtInversor= ''
       this.txtTipo= ''
-      localStorage.removeItem('rows')
-      localStorage.setItem('rows', JSON.stringify(this.rows))
-		},
-    cleanRegistro: function(){
-      this.txtPorcentaje = ''
-      this.txtTarjeta = ''
-      this.txtSecCode = ''
-      this.txtTitular = ''
-      this.txtFecExp = ''
-      this.txtMail = ''
 		}
-  },
-  mounted: function () {
-    if (localStorage.getItem('rows') !== null) {
-        this.rows = JSON.parse(localStorage.getItem('rows'))
-    }
   }
 }
 </script>
