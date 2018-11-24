@@ -81,14 +81,21 @@
   <div id="message" style="visibility: hidden">
     Elemento guardado con éxito.
   </div>
+  <VisitsCounter></VisitsCounter>
 </div>
  </template>
  <script>
+ import VisitsCounter from './VisitsCounter'
+
 export default {
   name: 'home',
+  components: {
+    VisitsCounter
+  },
   props: ['auth', 'authenticated'],
   data: function () {
     return {
+      host: '',
       rows: [],
       txtPorcentaje: '',
       txtMonto: '',
@@ -102,7 +109,7 @@ export default {
       window.location.href = uri
     },
     addRegistro: function(){
-      this.axios.post(process.env.API_HOST + '/loans', {
+      this.axios.post(this.host + '/loans', {
         'value': this.txtMonto,
         'interest':  this.txtInteres,
         'sold_percent': this.txtPorcentaje,
@@ -125,6 +132,13 @@ export default {
       this.txtInversor= ''
       this.txtTipo= ''
 		}
+  },
+  mounted: function () {
+    if (process.env.API_HOST !== 'undefined') {
+      this.host = process.env.API_HOST
+    } else {
+      this.host = 'http://localhost:5000'
+    }
   }
 }
 </script>

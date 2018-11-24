@@ -20,12 +20,18 @@
         Por favor <a @click="auth.login()">inicie sesión</a> para continuar.
       </h4>
     </div>
+    <VisitsCounter></VisitsCounter>
   </div>
 </template>
 
 <script>
+import VisitsCounter from './VisitsCounter'
+
 export default {
   name: 'home',
+  components: {
+    VisitsCounter
+  },
   props: ['auth', 'authenticated'],
   methods: {
     redirect (uri) {
