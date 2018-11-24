@@ -1,30 +1,38 @@
 <template>
-  <div class="col-md-12 col-xs-12">
-          <h1>LISTA DE PRESTAMOS</h1>
-          <table class="table">
-            <tr bgcolor=silver>
-              <th>ID Producto</th>
-              <th>Monto</th>
-              <th>Interés</th>
-              <th>% Vendido</th>
-              <th>Inversores</th>
-              <th>Tipo de producto</th>
-            </tr>
-            <tr v-for="item in lista">
-              <td v-text="item.txtId + 1"></td>
-              <td v-text="item.txtMonto"></td>
-              <td v-text="item.txtInteres"></td>
-              <td v-text="item.txtPorcentaje"></td>
-              <td v-text="item.txtInversor"></td>
-              <td v-text="item.txtTipo"></td>
-            </tr>
-          </table>
-        </div>
+  <div>
+    <div class="col-md-12 col-xs-12">
+            <h1>LISTA DE PRESTAMOS</h1>
+            <table class="table">
+              <tr bgcolor=silver>
+                <th>ID Producto</th>
+                <th>Monto</th>
+                <th>Interés</th>
+                <th>% Vendido</th>
+                <th>Inversores</th>
+                <th>Tipo de producto</th>
+              </tr>
+              <tr v-for="item in lista">
+                <td v-text="item.count_id"></td>
+                <td v-text="item.value"></td>
+                <td v-text="item.interest"></td>
+                <td v-text="item.sold_percent"></td>
+                <td v-text="item.investor"></td>
+                <td v-text="item.product_type"></td>
+              </tr>
+            </table>
+          </div>
+          <VisitsCounter></VisitsCounter>
+  </div>
 </template>
 
 <script>
+import VisitsCounter from './VisitsCounter'
+
 export default {
   name: 'home',
+  components: {
+    VisitsCounter
+  },
   data: function () {
     return {
       lista: []
@@ -34,12 +42,24 @@ export default {
   methods: {
     redirect (uri) {
       window.location.href = uri
+    },
+    getData () {
+      this.axios.get(this.host + '/loans')
+      .then(response => {
+        this.lista = response.data.data.loans
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
     }
   },
   mounted: function () {
-    if (localStorage.getItem('rows') !== null) {
-        this.lista = JSON.parse(localStorage.getItem('rows'))
+    if (process.env.API_HOST !== 'undefined') {
+      this.host = process.env.API_HOST
+    } else {
+      this.host = 'http://localhost:5000'
     }
+    this.getData()
   }
 }
 </script>
