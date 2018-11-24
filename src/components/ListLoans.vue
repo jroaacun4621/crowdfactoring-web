@@ -44,7 +44,7 @@ export default {
       window.location.href = uri
     },
     getData () {
-      this.axios.get(this.host + '/loans')
+      this.axios.get(this.host + '/loans/' + localStorage.getItem('user_id'))
       .then(response => {
         this.lista = response.data.data.loans
       })
