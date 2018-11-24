@@ -1,6 +1,7 @@
 import auth0 from 'auth0-js'
 import EventEmitter from 'eventemitter3'
 import router from './../router'
+import axios from 'axios'
 
 const CLIENT_ID = process.env.CLIENT_ID
 const DOMAIN = process.env.DOMAIN
@@ -34,13 +35,29 @@ export default class AuthService {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult)
-        router.replace('home')
+        console.log(localStorage.getItem('access_token'))
+        var instance = axios.create({
+          headers: {'Authorization': `Bearer ${localStorage.getItem('access_token')}`}
+        })
+        instance.get('https://' + process.env.DOMAIN + '/userinfo')
+        .then(response => {
+          localStorage.setItem('user_info', JSON.stringify(response.data))
+          router.replace('home')
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
       } else if (err) {
         router.replace('home')
         console.log(err)
         alert(`Error: ${err.error}. Check the console for further details.`)
       }
     })
+  }
+
+  getUserInfo () {
+    return JSON.parse(localStorage.getItem('user_info'))
   }
 
   setSession (authResult) {
@@ -59,6 +76,7 @@ export default class AuthService {
     localStorage.removeItem('access_token')
     localStorage.removeItem('id_token')
     localStorage.removeItem('expires_at')
+    localStorage.removeItem('user_info')
     this.userProfile = null
     this.authNotifier.emit('authChange', false)
     // navigate to the home route
