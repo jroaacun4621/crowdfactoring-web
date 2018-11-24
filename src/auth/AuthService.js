@@ -7,6 +7,7 @@ const CLIENT_ID = process.env.CLIENT_ID
 const DOMAIN = process.env.DOMAIN
 const CALLBACK_URL = process.env.CALLBACK_URL
 const API_HOST = process.env.API_HOST
+
 export default class AuthService {
   authenticated = this.isAuthenticated()
   authNotifier = new EventEmitter()
@@ -45,7 +46,7 @@ export default class AuthService {
           axios.get(API_HOST + '/user/' + user_sub)
           .then(response => {
             if (Object.keys(response.data.data.user).length === 0) {
-              axios.post('http://localhost:5000/user/' + user_sub)
+              axios.post(API_HOST + '/user/' + user_sub)
             }
           })
           router.replace('home')
