@@ -3,15 +3,10 @@ import EventEmitter from 'eventemitter3'
 import router from './../router'
 import axios from 'axios'
 
-// const CLIENT_ID = process.env.CLIENT_ID
-// const DOMAIN = process.env.DOMAIN
-// const CALLBACK_URL = process.env.CALLBACK_URL
-// const API_HOST = process.env.API_HOST
-
-const CLIENT_ID = 'XuULf_i31oATGH04Zx2-RTgfXQzQPU5v'
-const DOMAIN = 'syndication-web.auth0.com'
-const CALLBACK_URL = 'http://localhost:8080/callback'
-const API_HOST = 'https://localhost:5000'
+const CLIENT_ID = process.env.CLIENT_ID
+const DOMAIN = process.env.DOMAIN
+const CALLBACK_URL = process.env.CALLBACK_URL
+const API_HOST = process.env.API_HOST
 
 export default class AuthService {
   authenticated = this.isAuthenticated()
