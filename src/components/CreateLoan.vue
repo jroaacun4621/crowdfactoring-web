@@ -109,7 +109,7 @@ export default {
       window.location.href = uri
     },
     addRegistro: function(){
-      this.axios.post(this.host + '/loans/' + localStorage.getItem('user_id'), {
+      this.axios.post(this.host + '/loans', {
         'value': this.txtMonto,
         'interest':  this.txtInteres,
         'sold_percent': this.txtPorcentaje,

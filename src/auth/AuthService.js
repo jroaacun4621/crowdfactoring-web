@@ -35,19 +35,13 @@ export default class AuthService {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult)
+        console.log(localStorage.getItem('access_token'))
         var instance = axios.create({
           headers: {'Authorization': `Bearer ${localStorage.getItem('access_token')}`}
         })
-        instance.get('https://' + DOMAIN + '/userinfo')
+        instance.get('https://' + process.env.DOMAIN + '/userinfo')
         .then(response => {
-          var user_sub = response.data.sub
           localStorage.setItem('user_info', JSON.stringify(response.data))
-          axios.get('http://localhost:5000/user/' + user_sub)
-          .then(response => {
-            if (Object.keys(response.data.data.user).length === 0) {
-              axios.post('http://localhost:5000/user/' + user_sub)
-            }
-          })
           router.replace('home')
         })
         .catch(error => {

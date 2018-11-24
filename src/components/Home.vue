@@ -52,8 +52,7 @@ export default {
       center: {
         lat: 0,
         lng: 0
-      },
-      host: ''
+      }
     }
   },
   props: ['auth', 'authenticated'],
@@ -61,7 +60,7 @@ export default {
     redirect (uri) {
       window.location.href = uri
     },
-    getGPS () {
+    test () {
       var options = {
         enableHighAccuracy: true,
         timeout: 5000,
@@ -79,28 +78,10 @@ export default {
         console.warn('ERROR(' + err.code + '): ' + err.message);
       };
       navigator.geolocation.getCurrentPosition(success, error, options);
-    },
-    getUserId () {
-      if (process.env.API_HOST !== 'undefined') {
-        this.host = process.env.API_HOST
-      } else {
-        this.host = 'http://localhost:5000'
-      }
-      console.log(this.auth.getUserInfo())
-      if (this.auth.getUserInfo() !== null) {
-        this.axios.get(this.host + '/user/' + this.auth.getUserInfo().sub)
-        .then(response => {
-          localStorage.setItem('user_id', response.data.data.user.id)
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
-      }
     }
   },
   mounted: function () {
-    this.getGPS()
-    this.getUserId()
+    this.test()
   }
 }
 </script>
