@@ -58,6 +58,7 @@ export default {
       } else {
         host = 'localhost:8080'
       }
+      localStorage.removeItem('user_id')
       window.location.href = 'https://' + domain + '/v2/logout?returnTo=http%3A%2F%2F' + host
     },
     userName () {
