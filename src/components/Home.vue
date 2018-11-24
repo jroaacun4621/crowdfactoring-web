@@ -86,7 +86,6 @@ export default {
       } else {
         this.host = 'http://localhost:5000'
       }
-      console.log(this.auth.getUserInfo())
       if (this.auth.getUserInfo() !== null) {
         this.axios.get(this.host + '/user/' + this.auth.getUserInfo().sub)
         .then(response => {
