@@ -4,5 +4,6 @@ module.exports = {
   CLIENT_ID: '"' + process.env.CLIENT_ID + '"',
   DOMAIN: '"' + process.env.DOMAIN + '"',
   CALLBACK_URL: '"' + process.env.CALLBACK_URL + '"',
-  HOST: '"' + process.env.HOST + '"'
+  HOST: '"' + process.env.HOST + '"',
+  API_HOST: '"' + process.env.API_HOST + '"'
 }
