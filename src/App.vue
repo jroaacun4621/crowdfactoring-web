@@ -1,32 +1,22 @@
 <template>
   <div>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Auth0 - Vue</a>
-
-          <router-link :to="'/'"
-            class="btn btn-primary btn-margin">
-              Home
-          </router-link>
-
-          <button
-            class="btn btn-primary btn-margin"
-            v-if="!authenticated"
-            @click="login()">
-              Log In
-          </button>
-
-          <button
-            class="btn btn-primary btn-margin"
-            v-if="authenticated"
-            @click="logout()">
-              Log Out
-          </button>
-
-        </div>
-      </div>
-    </nav>
+    <b-navbar toggleable="md" type="dark" variant="dark">
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+      <b-navbar-brand href="/">Home</b-navbar-brand>
+      <b-collapse is-nav id="nav_collapse">
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item-dropdown right>
+            <!-- Using button-content slot -->
+            <template slot="button-content">
+              <em>{{ userName() }}</em>
+            </template>
+            <b-dropdown-item v-if="authenticated" @click="logout()">Log Out</b-dropdown-item>
+            <b-dropdown-item v-if="!authenticated" @click="login()">Log In</b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
 
     <div class="container">
       <router-view
@@ -40,10 +30,10 @@
 <script>
 import AuthService from './auth/AuthService'
 const auth = new AuthService()
-const { login, logout, authenticated, authNotifier } = auth
+const { login, logout, authenticated, authNotifier, getUserInfo } = auth
 export default {
   name: 'app',
-  data () {
+  data: function () {
     authNotifier.on('authChange', authState => {
       this.authenticated = authState.authenticated
     })
@@ -56,8 +46,40 @@ export default {
     login,
     logout () {
       logout()
-      window.location.href = 'https://' + process.env.DOMAIN + '/v2/logout?returnTo=http%3A%2F%2F' + process.env.HOST
+      var domain = ''
+      if (process.env.DOMAIN !== 'undefined') {
+        domain = process.env.DOMAIN
+      } else {
+        domain = 'syndication-web.auth0.com'
+      }
+      var host = ''
+      if (process.env.HOST !== 'undefined') {
+        host = process.env.HOST
+      } else {
+        host = 'localhost:8080'
+      }
+      localStorage.removeItem('user_id')
+      window.location.href = 'https://' + domain + '/v2/logout?returnTo=http%3A%2F%2F' + host
+    },
+    userName () {
+      if (getUserInfo() === null) {
+        return 'User'
+      } else {
+        return getUserInfo().name
+      }
     }
+  },
+  mounted: function () {
+    var host = ''
+    if (process.env.API_HOST !== 'undefined') {
+      host = process.env.API_HOST
+    } else {
+      host = 'http://localhost:5000'
+    }
+    this.axios.post(host + '/pageInfo')
+    .catch(error => {
+      console.log(error.response)
+    })
   }
 }
 </script>
